@@ -1,0 +1,27 @@
+match_country_field	lat	lon	precision	note
+China:Beijing	39.90	116.40	named place (city)	Beijing
+China:Guandong	23.13	113.26	named place (province capital)	Guangdong (Guangzhou)
+China:Hunan	28.23	112.94	named place (province capital)	Hunan (Changsha)
+China:Shandong	36.67	117.00	named place (province capital)	Shandong (Jinan)
+China: Shandong	36.67	117.00	named place (province capital)	Shandong (Jinan)
+China:Shanxi	37.87	112.55	named place (province capital)	Shanxi (Taiyuan)
+China: gaozhou	21.92	110.85	named place (city)	Gaozhou, Guangdong
+China: Hainan	19.20	109.70	named place (province)	Hainan Island
+China: Sanya Luhuitou reef	18.21	109.48	named place (reef)	Luhuitou reef, Sanya
+Taiwan: Green Island	22.66	121.49	named place (island)	Green Island
+USA: Florida Keys, Mote Outplant Mid-Channel	24.55	-81.40	named place (reef area)	Florida Keys
+USA: Florida Keys, Sand Key Buoy 12	24.45	-81.88	named place (reef)	Sand Key
+USA: Florida Keys, Sand Key buoy 3	24.45	-81.88	named place (reef)	Sand Key
+USA: FL, Looe Key	24.55	-81.41	named place (reef)	Looe Key
+USA: FL, Sand Key	24.45	-81.88	named place (reef)	Sand Key
+USA: FL, North ECA	26.60	-80.03	named place (reef tract)	Southeast Florida Coral Reef Ecosystem Conservation Area, north
+USA: FL, Middle ECA	26.10	-80.09	named place (reef tract)	Southeast Florida Coral Reef Ecosystem Conservation Area, middle
+USA: FL, South ECA	25.70	-80.09	named place (reef tract)	Southeast Florida Coral Reef Ecosystem Conservation Area, south
+China: Nanjing	32.06	118.80	named place (city)	Nanjing
+China: Pingliang	35.54	106.67	named place (city)	Pingliang, Gansu
+China:WuZhishan	18.78	109.52	named place (city)	Wuzhishan, Hainan
+China: Mianning County, Sichuan Province	28.55	102.17	named place (county)	Mianning County
+Thailand: Phetchaburi	12.96	99.94	named place (province)	Phetchaburi coast
+Egypt: South of Sinai, Sharm El-Sheikh	27.92	34.33	named place (city)	Sharm El-Sheikh
+Egypt: Red Sea	27.92	34.33	named place (coast)	Red Sea at Sharm El-Sheikh (same submitter series)
+Egypt: Red Sea, sharm el-sheikh, Souzth Sinai	27.92	34.33	named place (city)	Sharm El-Sheikh

@@ -1,0 +1,10 @@
+level	id	host_system	decision	code	reason
+bioproject	PRJNA281973	Coral	exclude	ENV	Indian Ocean expedition seawater metatranscriptomes (isolation_source water)
+bioproject	PRJEB40740	Coral	exclude	OTHERHOST	octocorals (Antillogorgia, gorgonians); the Coral arm comprises stony and reef-building corals only, as for the metagenomes
+bioproject	PRJNA1088180	Coral	exclude	HOSTGEN	"host transcriptome study (""Transcriptomic sequencing of four coral species""; organism = coral species, Invertebrate sample package)"
+bioproject	PRJNA907134	Sponge	exclude	HOSTGEN	"host sequencing of an undescribed sponge (""Sequencing of a southern California marine sponge""; organism = Bubarida sp.)"
+run	ERR2061841	Rhizosphere	exclude	ENV	"bulk soil (sample title ""Bulk soil not exposed to nanosilver"")"
+run	ERR2061844	Rhizosphere	exclude	ENV	"bulk soil (sample title ""Bulk soil exposed to nanosilver"")"
+run	SRR28969991	Rhizosphere	exclude	ENV	bulk soil (isolation_source Bulk)
+run	SRR28970005	Rhizosphere	exclude	ENV	bulk soil (isolation_source Bulk)
+bioproject	PRJNA1141094	Rhizosphere	exclude	ENV	"NCBI SraRunTable (checked 27 Oct): the 4 metatranscriptome runs (SRR30518502/505/508/512) are described only as ""bacteria(-and-phage) inoculated soil"" (pot experiment), organism ""plant metagenome"", library selection ""size fractionation""; rhizosphere is not stated for any sample"

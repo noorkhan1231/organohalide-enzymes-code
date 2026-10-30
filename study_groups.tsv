@@ -1,0 +1,14 @@
+study_group	BioProjects	basis
+SG_CoralMicrobialCommunities_JGI	PRJNA364873,PRJNA364874,PRJNA364875,PRJNA364876,PRJNA364877,PRJNA364878,PRJNA364879,PRJNA364880	one JGI study split into one-sample BioProjects
+SG_Theonella_Kitasato	PRJDB16459,PRJDB16460,PRJDB16461,PRJDB16462,PRJDB16463	same study title and centre (umbrella PRJDB16459)
+SG_Aplysina_Piran	PRJNA366444,PRJNA366445,PRJNA366446,PRJNA366447,PRJNA366448,PRJNA366449	one extraction-method study split into one-sample BioProjects
+SG_Mesophotic_Philippines	PRJNA925676,PRJNA926003,PRJNA928209,PRJNA928219,PRJNA928229,PRJNA928500,PRJNA928504,PRJNA928571,PRJNA928839,PRJNA928840,PRJNA928841,PRJNA928854,PRJNA929091,PRJNA929093	one study split into one-sample BioProjects (isolation_source 'sponge slice of mesophotic coral ecosystems')
+SG_Chapopote_sponges	PRJNA475438,PRJNA475442	same site, design and submitter
+SG_Negombata_RedSea	PRJNA1495482,PRJNA1495496	same study title and submitter
+SG_Striga_maize	PRJNA888840,PRJNA889583	same study title and submitter
+SG_3Domics	PRJEB86255,PRJEB86258	same consortium (3D'omics)
+SG_QUB_broiler	PRJEB102289,PRJEB102366	same centre (Queen's University Belfast)
+SG_Hohenheim_layers	PRJEB60928,PRJEB84467	same centre (University of Hohenheim)
+SG_Cardiff_sponges	PRJEB28366,PRJEB28367,PRJEB54767,PRJEB92350	same centre (Cardiff School of Biosciences)
+SG_Groningen_sponges	PRJEB23905,PRJEB24806	same centre (Rijksuniversiteit Groningen)
+SG_WhiteSea_sponges	PRJNA1211653,PRJNA1347440,PRJNA781598	same field station and research group (White Sea Biological Station)

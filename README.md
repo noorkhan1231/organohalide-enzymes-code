@@ -1,4 +1,4 @@
-# Analysis code: halogenase and dehalogenase enzymes in host-associated metagenomes
+# Bathy-RDases final analysis (28 Oct 2026)
 
 Everything for the manuscript is produced from `inputs/` by the scripts in `scripts/`, in the order below. Results go to `results/`, figures to `figures/`, tables and Supplementary Data to `tables/`, logs to `logs/`. `RESULTS_FINAL.md` holds every number; `MASTER_DATA_LEDGER.md` holds the data decisions; `ANALYSIS_STEPS.md` the step list.
 
@@ -19,7 +19,8 @@ Everything for the manuscript is produced from `inputs/` by the scripts in `scri
 | 11 | server: `scripts/server_bgc/` (antiSMASH 6.1.1; hub lists `hub3_genomic.txt`, `hub2_genomic.txt`) | `inputs/bgc_genomic_hubs` → `results/s12_bgc` |
 | 12 | `scripts/structures/build_dist.py`, `perm.R`; `scripts/s13_structures.py` | 529 structures, structural PERMANOVA, pockets |
 | 13 | `scripts/s14_hitlevel.py inputs/hitlevel inputs/bundle results/s14_hitlevel` | genes, prevalence, identity, domains, topology, plasmid contigs |
-| 14 | `scripts/figures/fig1_atlas.py` … `fig6_hubs_bgc.py`, `supp_figures.py` (argument: this folder; supp also the 21-Oct package for Supp Figs 1–3) | Figures 1–6, Supplementary Figures 1–14 |
+| 13b | `scripts/s16_indicator_host_support.py inputs results results/s16_indicator_support` | indicator subfamilies vs surroundings and in metatranscriptomes (Figure 4E, Table S9) |
+| 14 | `scripts/figures/fig1_atlas.py` … `fig6_hubs_bgc.py`, `supp_figures.py` (argument: this folder; supp also the 21-Oct package for Supp Figs 1–3) | Figures 1–6, Supplementary Figures 1–15 |
 | 15 | `scripts/s15_tables.py <this folder> <21-Oct package> tables` | Table 1, Supplementary Tables 1–16, Supplementary Data 1–7 |
 | 16 | `scripts/s99_verify.py <this folder>` | consistency check (all PASS on 28 Oct) |
 
@@ -27,3 +28,5 @@ Shared code: `scripts/stats_utils.py` (tests, BH FDR, Dunn letters), `scripts/fi
 
 ## Software used here
 Python 3.13 (pandas 3.0.5, NumPy 2.5.3, SciPy 1.18.1, statsmodels 0.15.0, matplotlib 3.11.2, GeoPandas 0.14.4, PyMuPDF 1.28.2), R 4.3.3 with vegan 2.6.4. Server tools and versions: Supplementary Table 16.
+
+Numbering note (30 Oct 2026): supplementary Tables, Figures and Data are numbered by first citation in the manuscript. Scripts keep their analysis-order internal keys and write the files under the published numbers (see MASTER_DATA_LEDGER.md for the old-to-new map).

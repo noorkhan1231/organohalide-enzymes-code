@@ -1,0 +1,83 @@
+level	id	host_system	decision	code	reason
+bioproject	PRJNA910824	Coral	exclude	ENV	seawater, not coral (env_material sea water; NCBI and ENA agree)
+run	SRR26146364	Coral	exclude	ENV	seawater sample within coral study PRJNA545004
+run	SRR9182858	Coral	exclude	ENV	seawater sample within coral study PRJNA545004 (isolation_source seawater)
+run	SRR9182859	Coral	exclude	ENV	seawater sample within coral study PRJNA545004 (isolation_source seawater)
+run	SRR9182862	Coral	exclude	ENV	seawater sample within coral study PRJNA545004 (isolation_source seawater)
+run	SRR9182871	Coral	exclude	ENV	seawater sample within coral study PRJNA545004 (isolation_source seawater)
+run	SRR9182872	Coral	exclude	ENV	seawater sample within coral study PRJNA545004 (isolation_source seawater)
+bioproject	PRJNA724996	Coral	exclude	ENV	coral reef sediment, not coral (isolation_source reef sediments)
+bioproject	PRJNA246443	Coral	exclude	CAPTIVE	home-aquarium corals without geographic provenance
+bioproject	PRJNA522695	Sponge	exclude	VIR	virus-enriched libraries (viral metagenome)
+run	SRR17015074	Sponge	exclude	VIR	viral-fraction library (PRJNA781598)
+bioproject	PRJNA1261827	Sponge	exclude	HOSTGEN	genome skimming of deep-water corals and sponges (host DNA study; includes octocorals and black corals)
+bioproject	PRJEB94496	Sponge	exclude	OTHERHOST	sharpnose pufferfish, not sponge
+bioproject	PRJEB62892	Sponge	exclude	HOSTGEN	host reference-genome project (genomic and transcriptomic data)
+bioproject	PRJNA557895	Sponge	exclude	HOSTGEN	host-genome study (RNA editing in metazoans)
+bioproject	PRJNA1001903	Sponge	exclude	HOSTGEN	host-organism sequencing (organism = Axinella corrugata; no metagenome in study)
+bioproject	PRJNA1236409	Sponge	exclude	FW	freshwater sponge (Spongilla lacustris, Lake Constance); decision D1
+bioproject	PRJEB58939	Sponge	exclude	FW	freshwater sponge (Spongilla lacustris); decision D1
+bioproject	PRJNA896766	Sponge	exclude	FW	freshwater sponge (Spongilla sp., Pichlinger See); decision D1
+run	SRR10996910	Sponge	exclude	ENV	seawater sample within sponge study PRJNA602572
+run	SRR10996911	Sponge	exclude	ENV	seawater sample within sponge study PRJNA602572
+run	SRR10996913	Sponge	exclude	ENV	seawater sample within sponge study PRJNA602572
+run	SRR10996914	Sponge	exclude	ENV	seawater sample within sponge study PRJNA602572
+run	SRR10996915	Sponge	exclude	ENV	seawater sample within sponge study PRJNA602572
+run	SRR10996916	Sponge	exclude	ENV	seawater sample within sponge study PRJNA602572
+run	SRR10996917	Sponge	exclude	ENV	seawater sample within sponge study PRJNA602572
+run	SRR10996918	Sponge	exclude	ENV	seawater sample within sponge study PRJNA602572
+run	SRR10996919	Sponge	exclude	ENV	seawater sample within sponge study PRJNA602572
+run	SRR11455652	Sponge	exclude	ENV	ocean-water sample within sponge study PRJNA613976
+run	SRR11455653	Sponge	exclude	ENV	ocean-water sample within sponge study PRJNA613976
+run	SRR11455654	Sponge	exclude	ENV	ocean-water sample within sponge study PRJNA613976
+run	SRR11455657	Sponge	exclude	ENV	ocean-water sample within sponge study PRJNA613976
+run	SRR11455658	Sponge	exclude	ENV	ocean-water sample within sponge study PRJNA613976
+bioproject	PRJNA678871	Chicken	note	-	run-level: soil and human runs excluded below; chicken runs kept
+run_list	PRJNA678871:soil	Chicken	exclude	ENV	farm soil, not chicken gut (PRJNA678871); used as matched surroundings sample
+run_list	PRJNA678871:human	Chicken	exclude	OTHERHOST	human gut (PRJNA678871)
+bioproject	PRJEB109750	Chicken	exclude	TISSUE	laser-microdissected formalin-fixed gut tissue for viromics, not gut-content metagenome
+run	SRR35033800	Chicken	exclude	VIR	virome library (PRJNA1305181)
+run	SRR35033808	Chicken	exclude	VIR	virome library (PRJNA1305181)
+run	SRR35033809	Chicken	exclude	VIR	virome library (PRJNA1305181)
+run	SRR35033811	Chicken	exclude	VIR	virome library (PRJNA1305181)
+run	SRR13062097	Rhizosphere	exclude	ENV	bulk soil control (PRJNA678475)
+run	SRR13062098	Rhizosphere	exclude	ENV	bulk soil control (PRJNA678475)
+run	SRR13062099	Rhizosphere	exclude	ENV	bulk soil control (PRJNA678475)
+run	SRR11092497	Rhizosphere	exclude	ENV	bulk soil (PRJNA603603)
+run	SRR11092500	Rhizosphere	exclude	ENV	bulk soil (PRJNA603603)
+run	SRR11092503	Rhizosphere	exclude	ENV	bulk soil (PRJNA603603)
+run	SRR11092504	Rhizosphere	exclude	ENV	bulk soil (PRJNA603603)
+run	SRR11092507	Rhizosphere	exclude	ENV	bulk soil (PRJNA603603)
+run	SRR11092510	Rhizosphere	exclude	ENV	bulk soil (PRJNA603603)
+bioproject	PRJNA1170282	Rhizosphere	exclude	ENV	bulk soil 20 cm from carrot rhizosphere (study title)
+bioproject	PRJNA1174177	Rhizosphere	keep	-	"NCBI experiments ""DNA Sequence from Monoculture Carrot Rhizosphere"" (SRX26416327-30); project = carrot rhizosphere soil; checked by Noor 27 Oct"
+run	SRR32592286	Rhizosphere	exclude	ENV	soil sample (not rhizoplane) within PRJNA1231735
+run	SRR32592287	Rhizosphere	exclude	ENV	soil sample (not rhizoplane) within PRJNA1231735
+run	SRR32592306	Rhizosphere	exclude	ENV	soil sample (not rhizoplane) within PRJNA1231735
+run	SRR32592307	Rhizosphere	exclude	ENV	soil sample (not rhizoplane) within PRJNA1231735
+bioproject	PRJNA1169405	Rhizosphere	keep	-	NCBI SRA: WGS / METAGENOMIC / RANDOM, organism rhizosphere metagenome, isolation_source Triticum aestivum rhizosphere (SbRBMetaG2-3); checked by Noor 27 Oct
+run	SRR22411263	Rhizosphere	exclude	TISSUE	root endosphere (endophyte), not rhizosphere (PRJNA904562)
+run	SRR22411264	Rhizosphere	exclude	TISSUE	root endosphere (endophyte), not rhizosphere (PRJNA904562)
+run	SRR22411265	Rhizosphere	exclude	TISSUE	root endosphere (endophyte), not rhizosphere (PRJNA904562)
+bioproject	PRJNA688820	Rhizosphere	keep	-	BioProject: rhizosphere and non-rhizosphere soil of winter wheat (Wang et al. 2021 Front Microbiol); 48 rhizosphere samples kept, 8 bulk-soil samples (cultivar code bk, env_broad_scale bulk soil) excluded
+bioproject	PRJEB52368	Coral	keep	-	BioSample: environmental material HOLOB, sampling environment C-CORAL (Tara Pacific coral holobiont)
+bioproject	PRJNA1231735	Rhizosphere	keep	-	paper (DNA Research 2025, dsaf032): metagenomes from extracted DNA, QIAseq FX libraries, no MDA (MDA only for single-cell genomes); BioSample host field mislabelled; 48 rhizoplane kept, 4 soil excluded
+bioproject	PRJNA1415870	Coral	keep	-	BioSample host: Orbicella faveolata, Colpophyllia natans, Montastraea cavernosa
+bioproject	PRJNA1478435	Sponge	keep	-	BioSample: env_medium sponge tissue, host Petrosia ficiformis
+bioproject	PRJNA1495496	Sponge	keep	-	BioSample host: Negombata corticata sponge
+bioproject	PRJNA1314382	Rhizosphere	keep	-	BioSample organism rhizosphere metagenome, host Angelica sinensis
+bioproject_list	PRJEB42019:DaviesReef	Sponge	exclude	DUP	EMP500 sponges from Davies Reef: same reef, host species and research network as PRJNA602572; possible re-sequencing of the same specimens
+bioproject	PRJNA1135076	Sponge	exclude	PLASMID	plasmidome (plasmid-enriched) libraries
+bioproject	PRJNA1463595	Sponge	exclude	PLASMID	plasmidome (plasmid-enriched) libraries
+sample	SAMN17189688	Rhizosphere	exclude	ENV	bulk soil (PRJNA688820; BioSample cultivar code bk, env_broad_scale bulk soil)
+sample	SAMN17189695	Rhizosphere	exclude	ENV	bulk soil (PRJNA688820; BioSample cultivar code bk, env_broad_scale bulk soil)
+sample	SAMN17189702	Rhizosphere	exclude	ENV	bulk soil (PRJNA688820; BioSample cultivar code bk, env_broad_scale bulk soil)
+sample	SAMN17189709	Rhizosphere	exclude	ENV	bulk soil (PRJNA688820; BioSample cultivar code bk, env_broad_scale bulk soil)
+sample	SAMN17189716	Rhizosphere	exclude	ENV	bulk soil (PRJNA688820; BioSample cultivar code bk, env_broad_scale bulk soil)
+sample	SAMN17189723	Rhizosphere	exclude	ENV	bulk soil (PRJNA688820; BioSample cultivar code bk, env_broad_scale bulk soil)
+sample	SAMN17189730	Rhizosphere	exclude	ENV	bulk soil (PRJNA688820; BioSample cultivar code bk, env_broad_scale bulk soil)
+sample	SAMN17189737	Rhizosphere	exclude	ENV	bulk soil (PRJNA688820; BioSample cultivar code bk, env_broad_scale bulk soil)
+bioproject	PRJNA1280067	Sponge	override_lib	-	SRA label AMPLICON, but NCBI BioProject describes shotgun metagenomes of 15-25 sponge species and runs average 35 Gb (impossible for amplicon); approved by Noor 27 Oct
+bioproject	PRJNA1256488	Sponge	override_lib	-	SRA label OTHER, but NCBI BioProject: total-DNA metagenomes of sponge tissue (some host-depleted with QIAamp DNA Microbiome kit), runs ~18 Gb; approved by Noor 27 Oct
+bioproject	PRJNA1072552	Sponge	override_lib	-	"SRA label OTHER, but NCBI BioProject: ""Shotgun metagenome sequencing of the deep-sea sponge Inflatella pellicula"""
+run	SRR496755	Sponge	override_noena	-	absent from ENA but NCBI SRA record: WGS / METAGENOMIC / RANDOM, whole symbiotic community of the deep-sea sponge Neamphius huxleyi (45.7 Gb)

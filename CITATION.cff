@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the paper below."
+title: "Analysis code: halogenase and dehalogenase enzymes in host-associated metagenomes"
+abstract: "Pipeline and analysis code for a comparative study of ten halogenase and dehalogenase families across chicken gut, coral, rhizosphere and sponge microbiomes."
+authors:
+  - family-names: Muhammad
+    given-names: Noor
+license: MIT
