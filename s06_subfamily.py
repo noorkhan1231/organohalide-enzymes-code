@@ -21,7 +21,7 @@ for f in SUBFAMS:
     w = fam[['sample_id', 'host_system', 'study']].set_index('sample_id').join(w).fillna(0)
     cols = [c for c in w.columns if c not in ('host_system', 'study')]; mats[f] = (w, cols)
     g = w.host_system.values
-    # composition: PERMANOVA/PERMDISP on samples with any labelled reads (Bray-Curtis undefined otherwise)
+    # composition: PERMANOVA/PERMDISP on samples with any labeled reads (Bray-Curtis undefined otherwise)
     if len(cols) >= 2:
         V = run_vegan(w.reset_index()[['sample_id', 'host_system', 'study'] + cols], 'sample_id', 'host_system', 'study', '-', f'{P}_{f}_vegan', int(os.environ.get('NMDS_K', '0')))
         v = V.set_index('test')
@@ -53,7 +53,7 @@ hc = lab.groupby(['family', 'subfamily', 'origin_host']).size().unstack(fill_val
 sig = sig.merge(gc, on=['family', 'subfamily'], how='left').merge(hc, on=['family', 'subfamily'], how='left')
 sig['single_host'] = ~sig.combination.str.contains(r'\+')
 
-# lineage control (genome level): among genomes carrying labelled genes of the family, is carriage of the indicator
+# lineage control (genome level): among genomes carrying labeled genes of the family, is carriage of the indicator
 # subfamily associated with the indicated host(s) within GTDB order (or family) strata?  CMH + stratified permutation.
 rng = np.random.default_rng(42)
 def lineage_test(fname, sname, hosts, level):

@@ -1,8 +1,8 @@
 """Step 11. Host-associated vs surrounding (ambient) metagenomes, at BioProject level, with a system-matched null-gene control.
 usage: python3 05_ambient.py <counts.tsv.gz> <quant_runs.tsv> <genome_equivalents.tsv> <target_meta.tsv> <runs.tsv> <ambient_dir> <null_summary.tsv> <outdir>
-Each family (and labelled subfamily) is expressed as RPKG; the null is RPKG of random non-target genes drawn from the same
+Each family (and labeled subfamily) is expressed as RPKG; the null is RPKG of random non-target genes drawn from the same
 genome collection as the host system (scaled from the 10 M read-pair subsample to full depth with Salmon num_processed).
-Null-normalised abundance = RPKG(target set) / RPKG(null genes of that system): it removes the advantage a host sample
+Null-normalized abundance = RPKG(target set) / RPKG(null genes of that system): it removes the advantage a host sample
 has because the reference genomes were assembled from host samples."""
 import sys, os, csv, json, numpy as np, pandas as pd
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))

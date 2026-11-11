@@ -1,4 +1,4 @@
-# Combined subfamily composition across all families: Bray-Curtis on RPKG of 55 labelled subfamilies, PCoA, PERMANOVA, PERMDISP.
+# Combined subfamily composition across all families: Bray-Curtis on RPKG of 55 labeled subfamilies, PCoA, PERMANOVA, PERMDISP.
 # usage: Rscript s06c_subfamily_combined.R <FINAL dir>
 suppressMessages(library(vegan))
 b <- commandArgs(TRUE)[1]; set.seed(1)

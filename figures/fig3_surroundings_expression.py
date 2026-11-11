@@ -1,7 +1,7 @@
 """Figure 3. Host-associated communities versus their surroundings, and expression of the ten families.
 usage: python3 fig3_surroundings_expression.py <FINAL dir>
 a reads recruited by random non-target (null) genes of each system's genome collection, host vs surroundings (study means);
-b host vs surroundings call per family (agreement of RPKG and null-normalised abundance, both FDR < 0.05; number = null-normalised
+b host vs surroundings call per family (agreement of RPKG and null-normalized abundance, both FDR < 0.05; number = null-normalized
   host/surroundings ratio of study means); c share of metatranscriptome runs with reads on each family; d expression (reads per
   kb per million reads processed) per run, with run- and study-level Kruskal-Wallis FDR.
 """
@@ -58,8 +58,8 @@ c0 = C.groupby('system')[['n_host_studies', 'n_ambient_studies']].max()
 ax.set_xticks(np.arange(4) + 0.5); ax.xaxis.tick_top()
 ax.set_xticklabels([f'{h}\n{c0.loc[h, "n_host_studies"]} vs {c0.loc[h, "n_ambient_studies"]}' for h in HOSTS], fontsize=5.8)
 ax.tick_params(length=0); [s_.set_visible(False) for s_ in ax.spines.values()]
-lg = [Patch(facecolor='#56B4E9', edgecolor='white', label='Host-enriched (host-system colour)'), Patch(facecolor=GREY, label='Surroundings-enriched'),
-      Patch(facecolor=UNCOL, edgecolor='#7B5EA7', hatch='////', label='Unresolved (RPKG and null-normalised abundance disagree)'), Patch(facecolor=NOCOL, label='No consistent difference')]
+lg = [Patch(facecolor='#56B4E9', edgecolor='white', label='Host-enriched (host-system color)'), Patch(facecolor=GREY, label='Surroundings-enriched'),
+      Patch(facecolor=UNCOL, edgecolor='#7B5EA7', hatch='////', label='Unresolved (RPKG and null-normalized abundance disagree)'), Patch(facecolor=NOCOL, label='No consistent difference')]
 fig.legend(handles=lg, loc='lower left', bbox_to_anchor=(0.17, 0.0), frameon=False, fontsize=5.6, handlelength=1.4, labelspacing=0.5, ncol=1)
 fig.savefig(f'{T}/b.pdf'); plt.close(fig)
 

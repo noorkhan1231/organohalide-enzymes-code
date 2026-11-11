@@ -120,7 +120,7 @@ for s in cache:
 wr(f"{R}/bgc_totals.tsv", ["set", "group", "genomes", "genomes_with_region", "total_regions",
    "colocated_regions"], tot)
 
-# ---------------- per-genus (analysed genomes only) ----------------
+# ---------------- per-genus (analyzed genomes only) ----------------
 canon = {r["genus"].lower(): r["genus"] for r in rd(HUBCSV, ",")}
 
 

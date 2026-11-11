@@ -1,6 +1,6 @@
 """Length-adjusted test of top-pocket quality by host system (529 curated structures).
 Addresses the reviewer point that pocket counts scale with protein size: pocket metrics are
-normalised per 100 residues, and the P2Rank top-3 pocket score is additionally tested on
+normalized per 100 residues, and the P2Rank top-3 pocket score is additionally tested on
 residuals from a regression on log10 chain length.
 usage: python3 s13b_pocket_length_adjusted.py <FINAL dir>"""
 import sys, numpy as np, pandas as pd

@@ -39,7 +39,7 @@ bars = [('Host system\nsample level', V.loc['host_sample', 'R2'], V.loc['host_sa
         ('Study nested\nin host system', V.loc['block_nested', 'R2'], V.loc['block_nested', 'P'], f"{int(V.loc['block_nested', 'df']) + 4} studies", '#7D3C98'),
         ('Host system after\ngenome equivalents', G.loc['host_system', 'R2'], G.loc['host_system', 'P'], f"GE R² = {G.loc['log10(GE)', 'R2']:.3f}", '#17A589')]
 for i, (lab, r2, p, n, c) in enumerate(bars):
-    ax.bar(i, r2, color=c, width=0.65); ax.text(i, r2 + 0.006, f'R² = {r2:.3f}\nP = {p:.4f}'.replace('P = 0.0010', 'P = 0.001') + f'\n{n}', ha='center', va='bottom', fontsize=5.4)
+    ax.bar(i, r2, color=c, width=0.65); ax.text(i, r2 + 0.006, f'R² = {r2:.3f}\nP = {max(p, 0.001):.3f}' + f'\n{n}', ha='center', va='bottom', fontsize=5.4)
 ax.set_xticks(range(4)); ax.set_xticklabels([b[0] for b in bars], fontsize=5.6); ax.set_ylim(0, 0.45); ax.set_ylabel('Variance explained (R²)')
 ax.spines[['top', 'right']].set_visible(False); label(ax, 'b', -0.2, 1.11)
 # c indicator families
@@ -97,7 +97,7 @@ ax.legend(ncol=2, frameon=False, loc='upper right', handlelength=1, columnspacin
 label(ax, 'f', -0.15)
 os.makedirs(f'{B}/figures', exist_ok=True); save(fig, out)
 with pd.ExcelWriter(out + '_source_data.xlsx') as xw:
-    nm.to_excel(xw, sheet_name='a_NMDS', index=False); pd.DataFrame(bars, columns=['test', 'R2', 'P', 'n', 'colour']).drop(columns='colour').to_excel(xw, sheet_name='b_R2', index=False)
+    nm.to_excel(xw, sheet_name='a_NMDS', index=False); pd.DataFrame(bars, columns=['test', 'R2', 'P', 'n', 'color']).drop(columns='color').to_excel(xw, sheet_name='b_R2', index=False)
     I.to_excel(xw, sheet_name='c_indicator', index=False); dn[['sample_id', 'host_system', 'sh']].rename(columns={'sh': 'shannon'}).to_excel(xw, sheet_name='d_shannon', index=False)
     RA.to_excel(xw, sheet_name='e_relative_abundance', index=False); K.reset_index().to_excel(xw, sheet_name='f_kruskal_dunn', index=False)
 print('Figure 2 written')

@@ -175,9 +175,12 @@ ax.spines[['top', 'right']].set_visible(False)
 save(fig, f'{OUT}/Supplementary_Figure_9'); plt.close(fig)
 GM.to_excel(f'{OUT}/Supplementary_Figure_9_source_data.xlsx', index=False)
 
-# ---- SF10 host vs surroundings, both measures
+# ---- SF10 host vs surroundings, both measures (A-D) and prevalence of each family in host samples (E; added 6 Nov 2026)
 AT = pd.read_csv(f'{R}/s11_ambient/host_vs_ambient_family.csv'); AT = AT[AT.set != 'NULL']
-fig, axs = plt.subplots(1, 4, figsize=(174 * MM, 68 * MM), sharey=True); fig.subplots_adjust(left=0.07, right=0.99, bottom=0.3, top=0.92, wspace=0.08)
+CL = pd.read_csv(f'{R}/s11_ambient/host_vs_ambient_calls.csv')
+fig = plt.figure(figsize=(174 * MM, 150 * MM))
+gs = fig.add_gridspec(2, 4, height_ratios=[1, 0.8], left=0.09, right=0.99, bottom=0.04, top=0.95, wspace=0.08, hspace=0.62)
+axs = [fig.add_subplot(gs[0, 0])]; axs += [fig.add_subplot(gs[0, k], sharey=axs[0]) for k in range(1, 4)]
 for ax, h in zip(axs, HOSTS):
     for k, (m, c_) in enumerate([('RPKG', COL[h]), ('null_normalised', '#555555')]):
         x = AT[(AT.system == h) & (AT.measure == m)].set_index('set').reindex(FAM)
@@ -191,11 +194,30 @@ for ax, h in zip(axs, HOSTS):
             if x.FDR.iloc[i] < 0.05: ax.text(pos[i], (lr.iloc[i] if fin.iloc[i] else 1.2) + (0.3 if (fin.iloc[i] and lr.iloc[i] >= 0) or not fin.iloc[i] else -1.0), '*', ha='center', fontsize=6)
     ax.axhline(0, color='black', lw=0.5); ax.set_title(h, fontsize=6.4); ax.set_xticks(range(len(FAM))); ax.set_xticklabels(FAM, rotation=60, ha='right', rotation_mode='anchor', fontsize=5.2)
     ax.spines[['top', 'right']].set_visible(False)
+    if h != HOSTS[0]: plt.setp(ax.get_yticklabels(), visible=False)
 axs[0].set_ylabel('log$_2$ host / surroundings (study means)')
-letter_axes(axs, -0.12, 1.06)
-fig.legend(handles=[tup(), tup('//////')], labels=['RPKG', 'null-normalised'], handler_map={tuple: HandlerTuple(ndivide=None, pad=0)}, ncol=2, frameon=False, loc='lower center', bbox_to_anchor=(0.5, 0.0), fontsize=5.6, handlelength=3)
+fig.legend(handles=[tup(), tup('//////')], labels=['RPKG', 'null-normalized'], handler_map={tuple: HandlerTuple(ndivide=None, pad=0)}, ncol=2, frameon=False, loc='center', bbox_to_anchor=(0.5, 0.47), fontsize=5.6, handlelength=3)
+# E: share of samples and of studies with reads on each family, per host system; outlined cells = host-enriched calls
+axE = fig.add_subplot(gs[1, :])
+st = F.groupby(['host_system', 'study'])[FAM].mean().reset_index()
+ps = F.groupby('host_system')[FAM].apply(lambda d: (d > 0).mean() * 100).reindex(HOSTS)
+pt = st.groupby('host_system')[FAM].apply(lambda d: (d > 0).mean() * 100).reindex(HOSTS)
+axE.imshow(ps.values, cmap='Greys', vmin=0, vmax=130, aspect='auto')
+for i, h in enumerate(HOSTS):
+    for j, f in enumerate(FAM):
+        axE.text(j, i, f'{ps.iloc[i, j]:.0f}% ({pt.iloc[i, j]:.0f}%)', ha='center', va='center', fontsize=5.0, color='white' if ps.iloc[i, j] > 75 else 'black')
+        c = CL[(CL.system == h) & (CL.set == f)].call
+        if len(c) and c.iloc[0] == 'host-enriched':
+            axE.add_patch(matplotlib.patches.Rectangle((j - 0.48, i - 0.46), 0.96, 0.92, fill=False, edgecolor=COL[h], lw=1.6))
+axE.set_xticks(range(len(FAM))); axE.set_xticklabels(FAM, fontsize=5.6); axE.set_yticks(range(4)); axE.set_yticklabels(HOSTS, fontsize=5.8)
+axE.tick_params(length=0); [sp.set_visible(False) for sp in axE.spines.values()]
+axE.set_title('Host-associated samples with reads on the family, % (studies with reads, %); outlined: host-enriched (Figure 3B)', fontsize=5.8, pad=4)
+letter_axes(axs, -0.12, 1.06); axE.text(-0.075, 1.12, 'E', transform=axE.transAxes, fontsize=7.5, fontweight='bold', va='bottom')
 save(fig, f'{OUT}/Supplementary_Figure_10'); plt.close(fig)
-AT.to_excel(f'{OUT}/Supplementary_Figure_10_source_data.xlsx', index=False)
+with pd.ExcelWriter(f'{OUT}/Supplementary_Figure_10_source_data.xlsx') as xw:
+    AT.to_excel(xw, sheet_name='A-D_tests', index=False)
+    ps.round(1).reset_index().to_excel(xw, sheet_name='E_pct_samples', index=False); pt.round(1).reset_index().to_excel(xw, sheet_name='E_pct_studies', index=False)
+    CL[['system', 'set', 'call']].to_excel(xw, sheet_name='E_calls', index=False)
 
 # ---- SF11 metatranscriptomes, study means
 MS = pd.read_csv(f'{R}/s07_metatx/metatx_rpkm_per_study.csv'); MK = pd.read_csv(f'{R}/s07_metatx/metatx_family_tests.csv').set_index('family')
@@ -208,8 +230,8 @@ for ax, f in zip(axs.flat, FAM):
     ax.set_ylim(-3.3, 3.6); ax.spines[['top', 'right']].set_visible(False)
 for ax in axs[:, 0]: ax.set_ylabel('Study mean RPKM (+10$^{-3}$)')
 letter_axes(axs.flat, -0.32, 1.06)
-save(fig, f'{OUT}/Supplementary_Figure_11'); plt.close(fig)
-MS.to_excel(f'{OUT}/Supplementary_Figure_11_source_data.xlsx', index=False)
+save(fig, f'{OUT}/Supplementary_Figure_12'); plt.close(fig)
+MS.to_excel(f'{OUT}/Supplementary_Figure_12_source_data.xlsx', index=False)
 
 # ---- SF12 signal peptides
 DT = pd.read_csv(f'{R}/s14_hitlevel/deeptmhmm_summary.csv'); DTT = pd.read_csv(f'{B}/inputs/hitlevel/deeptmhmm_host_tests.tsv', sep='\t').set_index('gene')
@@ -227,8 +249,8 @@ for i_, f_ in enumerate(fs):
 ax.set_xticks(range(len(fs))); ax.set_xticklabels(fs)
 ax.set_ylabel('Genes with signal peptide (%)'); ax.set_ylim(0, 100); ax.spines[['top', 'right']].set_visible(False)
 ax.legend(ncol=4, frameon=False, loc='lower center', bbox_to_anchor=(0.5, 1.2), handlelength=1)
-save(fig, f'{OUT}/Supplementary_Figure_12'); plt.close(fig)
-DT.to_excel(f'{OUT}/Supplementary_Figure_12_source_data.xlsx', index=False)
+save(fig, f'{OUT}/Supplementary_Figure_13'); plt.close(fig)
+DT.to_excel(f'{OUT}/Supplementary_Figure_13_source_data.xlsx', index=False)
 
 # ---- SF13 structural PERMANOVA + PCoA
 SPm = pd.read_csv(f'{R}/s13_structures/structure_permanova_529.csv'); SPm = SPm[SPm.P.notna()].sort_values('R2')
@@ -252,10 +274,10 @@ for k, g in enumerate(grp):
     ax.tick_params(labelsize=4.8); ax.spines[['top', 'right']].set_visible(False)
     label(ax, chr(66 + k), -0.35)
 fig.legend(handles=[Patch(facecolor=COL[h], label=h) for h in HOSTS], ncol=1, frameon=False, loc='center left', bbox_to_anchor=(0.62, 0.75), handlelength=1)
-save(fig, f'{OUT}/Supplementary_Figure_13'); plt.close(fig)
-SPm.to_excel(f'{OUT}/Supplementary_Figure_13_source_data.xlsx', index=False)
+save(fig, f'{OUT}/Supplementary_Figure_14'); plt.close(fig)
+SPm.to_excel(f'{OUT}/Supplementary_Figure_14_source_data.xlsx', index=False)
 
-# ---- SF14 chain length and pockets (raw, normalised and length-adjusted)
+# ---- SF14 chain length and pockets (raw, normalized and length-adjusted)
 P2 = pd.read_excel(f'{B}/inputs/structures/Supplementary_Data_5.xlsx', 'p2rank_pockets')
 SS = pd.read_csv(f'{R}/s13_structures/structures_529_per_structure.csv'); P2 = P2[P2.safe_id.isin(SS.safe_id)]
 LA = pd.read_csv(f'{R}/s13_structures/pocket_length_adjusted_529.csv')
@@ -319,8 +341,8 @@ c.legend(frameon=False, fontsize=5, loc='lower right', handletextpad=0.2, bbox_t
 for ax_ in axs_new: ax_.spines[['top', 'right']].set_visible(False); ax_.tick_params(length=2)
 letter_axes(list(axs.flat) + axs_new, -0.3, 1.04)
 axr.text(-0.012, 1.02, 'P', transform=axr.transAxes, fontsize=9, fontweight='bold', va='bottom', ha='left')
-save(fig, f'{OUT}/Supplementary_Figure_14'); plt.close(fig)
-with pd.ExcelWriter(f'{OUT}/Supplementary_Figure_14_source_data.xlsx') as xw:
+save(fig, f'{OUT}/Supplementary_Figure_15'); plt.close(fig)
+with pd.ExcelWriter(f'{OUT}/Supplementary_Figure_15_source_data.xlsx') as xw:
     P2.to_excel(xw, sheet_name='pocket_metrics', index=False)
     LA.to_excel(xw, sheet_name='length_adjusted_tests', index=False)
     pd.read_csv(f'{R}/s13_structures/pocket_tool_agreement_529.csv').to_excel(xw, sheet_name='tool_agreement', index=False)
@@ -366,8 +388,8 @@ for k_, n_ in enumerate([1, 10, 100]):
 fig.text(0.625, 0.050, 'Curated genes', fontsize=5.6, fontweight='bold', va='center', ha='right')
 letter_axes(axs, -0.22, 1.02)
 fig.subplots_adjust(left=0.135, right=0.975, top=0.93, bottom=0.20)
-save(fig, f'{OUT}/Supplementary_Figure_15'); plt.close(fig)
-with pd.ExcelWriter(f'{OUT}/Supplementary_Figure_15_source_data.xlsx') as xw:
+save(fig, f'{OUT}/Supplementary_Figure_16'); plt.close(fig)
+with pd.ExcelWriter(f'{OUT}/Supplementary_Figure_16_source_data.xlsx') as xw:
     pd.DataFrame({'genus': order, 'families': [int(nfam[g]) for g in order], 'curated_genes': [int(ngen[g]) for g in order]}).to_excel(xw, sheet_name='top20_genera', index=False)
     TX.groupby(['genus', 'gene', 'environment']).size().rename('genes').reset_index().to_excel(xw, sheet_name='genus_family_host', index=False)
 print('SF15 written; Streptomyces families =', int(nfam['Streptomyces']))

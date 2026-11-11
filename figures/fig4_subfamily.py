@@ -1,7 +1,7 @@
 """Figure 4. Subfamilies partition among host systems more strongly than families.
 usage: python3 fig4_subfamily.py <FINAL dir>
 a variance in composition explained by host system: ten-family composition vs subfamily composition within each family
-  (sample and study level; PERMANOVA, Bray-Curtis); b all 48 indicator subfamilies (multipatt IndVal, labels in grey rest on <= 3 curated genes;
+  (sample and study level; PERMANOVA, Bray-Curtis); b all 48 indicator subfamilies (multipatt IndVal, labels in gray rest on <= 3 curated genes;
   FDR <= 0.05): dots = share of samples with reads, filled = host system(s) of the indicator combination, with IndVal, curated
   genes and the genome-level lineage control (GTDB order); c mean subfamily composition per host system (samples with reads
   on the family); e three lines of host support for the six subfamilies that stay host-associated within GTDB order:
@@ -21,7 +21,7 @@ host = F.set_index('sample_id').host_system
 KS = pd.read_csv(f'{B}/results/s06_subfamily/main_subfamily_kruskal.csv')
 
 
-# ---- p: combined PCoA of all labelled subfamilies
+# ---- p: combined PCoA of all labeled subfamilies
 from scipy.stats import chi2
 from matplotlib.patches import Ellipse
 PC = pd.read_csv(f'{B}/results/s06_subfamily/combined_pcoa_coordinates.csv'); CP = pd.read_csv(f'{B}/results/s06_subfamily/combined_permanova.csv').set_index('level')
@@ -138,7 +138,7 @@ for i, (f, sf) in enumerate(six):
     orr = ia.lineage_order_OR; xo = CAPX[0] if not np.isfinite(orr) else orr
     axs[0].scatter([xo], [y], s=14, marker='>' if not np.isfinite(orr) else 'o', color=hc, zorder=3, linewidths=0)
     axs[0].text(xo * (0.55 if not np.isfinite(orr) else 1.5), y + 0.28, f'{int(ia.lineage_order_strata)}', fontsize=4.6, ha='center', va='bottom', color='#333333')
-    # (2) above surroundings, null-normalised fold, per indicator host
+    # (2) above surroundings, null-normalized fold, per indicator host
     for j, h in enumerate(hosts):
         r = SV[(SV.family == f) & (SV.subfamily == sf) & (SV.system == h)].iloc[0]
         v = r.ratio_norm; xv = CAPX[1] if not np.isfinite(v) else v; yy = y + (0.17 if j == 0 else -0.17) * (len(hosts) > 1)

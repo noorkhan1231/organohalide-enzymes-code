@@ -2,7 +2,7 @@
 usage: python3 fig1_atlas.py <FINAL dir>
 a workflow (SVG with host drawings; numbers from results); b world map of the 1,787 metagenomes (aggregated per host system and
 0.5-degree cell; filled = site coordinates, open squares = named place or country centroid); c curated genes per family and
-host system; d amino-acid identity of curated genes to the closest characterised reference.
+host system; d amino-acid identity of curated genes to the closest characterized reference.
 Writes figures/Figure_1.pdf (vector), .jpg (1200 dpi), _preview.png and Figure_1_source_data.xlsx.
 """
 import sys, os, json, warnings, numpy as np, pandas as pd
@@ -85,7 +85,7 @@ ax.legend(ncol=4, frameon=False, loc='lower center', bbox_to_anchor=(0.5, 1.0), 
 gh = pd.read_csv(f'{B}/results/s14_hitlevel/prevalence_copy_number.csv')
 fig.savefig(f'{T}/c.pdf'); plt.close(fig)
 
-# ---- d: identity to characterised references
+# ---- d: identity to characterized references
 I = pd.read_csv(f'{B}/inputs/hitlevel/identity_to_reference_per_hit.csv')
 main = [f for f in FAM if f not in ('GSTDase', 'MetDase')]; hom = ['MetDase', 'GSTDase']
 order = sorted(main, key=lambda f: -I[I.family == f].identity.median()) + hom
@@ -104,7 +104,7 @@ for p_, f in zip(pos, order):
 ax.axvline(50, color='#888888', lw=0.6, ls='--')
 n_tot = I.groupby('family').size(); hits = pd.read_csv(f'{B}/results/s14_hitlevel/identity_summary.csv', index_col=0)
 ax.set_yticks(pos); ax.set_yticklabels([f'{f} (n = {n_tot[f]:,})' for f in order], fontsize=5.6)
-ax.invert_yaxis(); ax.set_xlim(15, 100); ax.set_xlabel('Identity to closest characterised\nreference (%)'); ax.spines[['top', 'right']].set_visible(False)
+ax.invert_yaxis(); ax.set_xlim(15, 100); ax.set_xlabel('Identity to closest characterized\nreference (%)'); ax.spines[['top', 'right']].set_visible(False)
 pr = hl['identity_pooled_excl_GSTDase_MetDase']
 fig.savefig(f'{T}/d.pdf'); plt.close(fig)
 

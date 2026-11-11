@@ -10,7 +10,7 @@ warnings.filterwarnings('ignore')
 f, out = sys.argv[1:3]
 plt.rcParams.update({'font.family': 'Liberation Sans', 'font.size': 7, 'pdf.fonttype': 42, 'svg.fonttype': 'none'})
 P = pd.read_csv(f, sep='\t')
-COL = {'Chicken': '#E69F00', 'Coral': '#56B4E9', 'Rhizosphere': '#009E73', 'Sponge': '#CC79A7'}   # same host colours as all manuscript figures
+COL = {'Chicken': '#E69F00', 'Coral': '#56B4E9', 'Rhizosphere': '#009E73', 'Sponge': '#CC79A7'}   # same host colors as all manuscript figures
 H = list(COL)
 world = gp.read_file(gp.datasets.get_path('naturalearth_lowres')); world = world[world.name != 'Antarctica']
 P['exact'] = P.coord_source.isin(['ENA run record', 'BioSample attribute'])

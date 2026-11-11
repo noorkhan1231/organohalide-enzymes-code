@@ -2,7 +2,7 @@
 usage: python3 s14_hitlevel.py <inputs/hitlevel> <inputs/bundle> <out_dir>
 Inputs (all on the curated set; computed earlier on the server and checked here):
   All_families_taxonomy_curated9396.tsv  hit -> genome, host system, family, GTDB lineage
-  identity_to_reference_per_hit.csv      DIAMOND identity of each hit to its closest characterised HaloCycDB reference
+  identity_to_reference_per_hit.csv      DIAMOND identity of each hit to its closest characterized HaloCycDB reference
   Domain_architecture_per_hit.xlsx       Pfam-A architecture per hit (hmmscan --cut_ga, i-Evalue <= 1e-5) + subfamily label
   Domain_vs_host_all_hits.xlsx, Domains_marine_terrestrial_and_pockets.xlsx   domain tests (host; marine vs terrestrial;
                                          within GTDB order, CMH) - copied, not recomputed
@@ -31,7 +31,7 @@ g['carriers_with_any_hit'] = g.environment.map(S['carriers_by_host'])
 g['prevalence_pct_carriers'] = 100 * g.carriers / g.carriers_with_any_hit
 g.rename(columns={'gene': 'family', 'environment': 'host_system'}).to_csv(f'{O}/prevalence_copy_number.csv', index=False)
 pd.crosstab(t.gene, t.environment).reindex(index=FAM, columns=HOSTS, fill_value=0).to_csv(f'{O}/genes_per_family_host.csv')
-# identity to closest characterised reference
+# identity to closest characterized reference
 i = pd.read_csv(f'{H}/identity_to_reference_per_hit.csv'); assert i.hit_id.isin(t.hit_id).all()
 iq = i.groupby('family').identity.agg(n='size', median='median', q25=lambda v: v.quantile(.25), q75=lambda v: v.quantile(.75),
                                        pct_below_50=lambda v: 100 * (v < 50).mean()).reindex(FAM)

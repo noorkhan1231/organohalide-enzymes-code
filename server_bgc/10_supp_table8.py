@@ -48,7 +48,7 @@ for d in ("primary_ge3", "sensitivity_ge2"):
             "median_rate": x["median_rate"] if x else "",
             "previous_n_genomes_analysed": y["n_genomes_analysed"] if y else "",
             "previous_n_colocated": y["n_colocated"] if y else "",
-            "note": "" if x else "genus absent from analysed hub genomes"})
+            "note": "" if x else "genus absent from analyzed hub genomes"})
 keys = []
 for r in rows:
     keys += [k for k in r if k not in keys]

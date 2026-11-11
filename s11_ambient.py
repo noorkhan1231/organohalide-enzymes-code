@@ -9,13 +9,13 @@ Null-gene control: Salmon on the first 10 million read pairs against random non-
 collection of each host system (inputs/original/null_summary.tsv = earlier host runs + all ambient runs;
 inputs/null_extra/null_summary_extra.tsv = runs added for the remaining host studies, 2-3 runs per study).
 null RPKG(run, system) = null RPK on the subsample x (reads processed at full depth / reads processed in subsample) / GE(run).
-Null-normalised abundance(run) = RPKG(family, run) / null RPKG(run, matching system); it removes the advantage a host sample
+Null-normalized abundance(run) = RPKG(family, run) / null RPKG(run, matching system); it removes the advantage a host sample
 has because the reference genomes were assembled from host-associated samples.
 
 Tests (per host system, per family): two-sided Mann-Whitney U on study means (host: study = BioProject or merged study
 group used in all other analyses; ambient: BioProject), only when both sides have >= 3 studies; BH FDR within
 scope x measure. Measures: RPKG (all main-set host samples, sample level from s04) and null_normalised (runs with a null value).
-Call (conservative): a family is host-enriched (or surroundings-enriched) only when RPKG and null-normalised abundance both
+Call (conservative): a family is host-enriched (or surroundings-enriched) only when RPKG and null-normalized abundance both
 differ in the same direction at FDR < 0.05; opposite directions = 'unresolved'. Matched-only comparisons (ambient runs from
 the host BioProjects) are not tested: only Sponge reaches 3 matched studies.
 """

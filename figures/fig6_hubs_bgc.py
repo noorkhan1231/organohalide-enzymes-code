@@ -1,9 +1,9 @@
 """Figure 6. Hub genera and co-location of target genes with biosynthetic gene clusters (BGCs).
 usage: python3 fig6_hubs_bgc.py <FINAL dir>
-a hub genera (subfamily or family-level labels in >= 3 families) x labelled subfamilies: dot size = curated genes, colour = number
+a hub genera (subfamily or family-level labels in >= 3 families) x labeled subfamilies: dot size = curated genes, color = number
   of metagenome samples with reads on that genus-subfamily pair; b share of genomes with a BGC region overlapping a target gene
   or within 10 kb, hub vs flagship-only genomes; c Fisher odds ratios (95% CI) for each comparison; d co-location per hub genus
-  (>= 5 genomes analysed). BGC results: results/s12_bgc (antiSMASH 6.1.1 on the curated set, server).
+  (>= 5 genomes analyzed). BGC results: results/s12_bgc (antiSMASH 6.1.1 on the curated set, server).
 """
 import sys, os, numpy as np, pandas as pd
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))

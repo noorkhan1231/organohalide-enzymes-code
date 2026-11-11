@@ -1,4 +1,4 @@
-"""Shared figure style: Liberation Sans (Arial-metric), 6.5-7 pt, host colours used in every manuscript figure."""
+"""Shared figure style: Liberation Sans (Arial-metric), 6.5-7 pt, host colors used in every manuscript figure."""
 import matplotlib; matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 plt.rcParams.update({'font.family': 'Liberation Sans', 'font.size': 6.5, 'axes.titlesize': 7, 'axes.labelsize': 6.5, 'axes.labelweight': 'bold',

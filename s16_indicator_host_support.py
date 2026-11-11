@@ -3,9 +3,9 @@ usage: python3 s16_indicator_host_support.py <inputs_dir> <results_dir> <out_dir
 
 For each of the 48 indicator subfamilies (Figure 4 source data, sheet c_all_48_indicators), and in the indicator host system(s):
  (1) Host vs surroundings: the s11 procedure applied to the subfamily instead of the family. Host RPKG at sample level (s04
-     subfamily_rpkg_long_main), surroundings RPKG at run level; null-normalised abundance on runs with a null value (s11
+     subfamily_rpkg_long_main), surroundings RPKG at run level; null-normalized abundance on runs with a null value (s11
      ambient_runs_rpkg null_RPKG). Two-sided Mann-Whitney U on study means, >= 3 studies per side; BH FDR across all
-     subfamily x system tests within each measure. Call as in s11: host-enriched only when RPKG and null-normalised agree
+     subfamily x system tests within each measure. Call as in s11: host-enriched only when RPKG and null-normalized agree
      in direction and both reach FDR < 0.05.
  (2) Expression: subfamily RPKM in the 190 metatranscriptome runs of s07; share of runs and of studies with reads per host
      system; Kruskal-Wallis across host systems at run level and at study level (BH FDR across subfamilies).
@@ -54,7 +54,7 @@ for r in IND.itertuples():
         A = R[(R.system == sysn) & (R.group != 'host')].copy()
         A['v'] = [sub_run.get(('ambient' if d == 'ambient' else 'host', rn, k), 0.0) / ge for d, rn, ge in zip(A.ds, A.run, A.GE)]
         t1 = proj(H.groupby('study').v.mean(), A.groupby('unit').v.mean())
-        # null-normalised: runs with a null value
+        # null-normalized: runs with a null value
         X = R[(R.system == sysn) & (R.null_RPKG > 0)].copy()
         X['v'] = [sub_run.get((d, rn, k), 0.0) / ge for d, rn, ge in zip(X.ds, X.run, X.GE)]
         X['norm'] = X.v / X.null_RPKG

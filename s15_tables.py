@@ -22,7 +22,7 @@ def med_iqr(v, scale=1, fmt='{:,.1f}'):
 
 # ================= Table 1 =================
 amb = AR[AR.group != 'host']
-AMBTYPE = {'Chicken': 'poultry litter and poultry-farm soil', 'Coral': 'seawater', 'Rhizosphere': 'bulk soil', 'Sponge': 'seawater'}
+AMBTYPE = {'Chicken': 'poultry litter, poultry-house surfaces and poultry-farm soil', 'Coral': 'seawater', 'Rhizosphere': 'bulk soil', 'Sponge': 'seawater'}
 rows = []
 def row(label, f, total=None): rows.append([label] + [f(h) for h in HOSTS] + [total])
 sub = lambda h: S[S.host_system == h]
@@ -53,12 +53,12 @@ ST = {}; title = {}
 o = pd.ExcelFile(f'{OLD}/Supplementary_Tables.xlsx')
 for k, s in [('S1', 'S1_references_HMMs'), ('S2', 'S2_search_cutoffs'), ('S3', 'S3_gene_trees')]:
     ST[k] = o.parse(s)
-_rf = pd.read_csv(f'{ROOT}/inputs/halocycdb_core_references.csv') if 'ROOT' in globals() else pd.read_csv('/home/claude/FINAL/inputs/halocycdb_core_references.csv')
+_rf = pd.read_csv(f'{I}/halocycdb_core_references.csv')
 _rf = _rf[(_rf.gene_family != 'HahyDase') & ~((_rf.gene_family == 'GSTDase') & (_rf.accession_number == 'MG878877.1'))]
 assert len(_rf) == 217, len(_rf)
 _rf = _rf[['gene_family', 'gene_name', 'accession_number', 'species', 'host', 'substrate', 'product', 'pfam', 'motif_conserved_seq', 'reference']].rename(columns={'gene_family': 'family', 'host': 'source_host'})
 ST['S1'] = (ST['S1'], _rf)
-title['S1'] = 'Characterised reference enzymes (217 accessions listed per family) and profile HMMs per enzyme family'
+title['S1'] = 'Characterized reference enzymes (217 accessions listed per family) and profile HMMs per enzyme family'
 title['S2'] = 'Search cut-offs and genes per enzyme family and host system'
 title['S3'] = 'Gene trees: tips, references, outgroups and curated genes'
 # S4 studies
@@ -86,7 +86,7 @@ SP = pd.read_csv(f'{R}/s06_subfamily/main_subfamily_permanova.csv'); SK = pd.rea
 SI = pd.read_csv(f'{R}/s06_subfamily/main_subfamily_indicators_significant.csv')
 HS = pd.read_csv(f'{R}/s16_indicator_support/indicator_host_vs_surroundings.csv'); HE = pd.read_csv(f'{R}/s16_indicator_support/indicator_expression.csv')
 HL = pd.read_csv(f'{R}/s17_lineage_ranks/indicator_lineage_broader_ranks.csv')
-ST['S9'] = (pd.read_csv(f'{R}/s06_subfamily/combined_permanova.csv'), SP, SI, SK, HS, HE, HL); title['S9'] = 'Subfamilies: composition by host system (PERMANOVA, all labelled subfamilies combined and per family), indicator subfamilies with genome-level lineage control, abundance tests, indicator subfamilies versus surrounding metagenomes and in metatranscriptomes, lineage control at GTDB family, class and phylum'
+ST['S9'] = (pd.read_csv(f'{R}/s06_subfamily/combined_permanova.csv'), SP, SI, SK, HS, HE, HL); title['S9'] = 'Subfamilies: composition by host system (PERMANOVA, all labeled subfamilies combined and per family), indicator subfamilies with genome-level lineage control, abundance tests, indicator subfamilies versus surrounding metagenomes and in metatranscriptomes, lineage control at GTDB family, class and phylum'
 cov = pd.read_csv(f'{R}/s11_ambient/ambient_coverage.csv'); calls = pd.read_csv(f'{R}/s11_ambient/host_vs_ambient_calls.csv')
 alltests = pd.read_csv(f'{R}/s11_ambient/host_vs_ambient_family.csv'); nul = pd.read_csv(f'{R}/s11_ambient/null_gene_recruitment.csv')
 ST['S10'] = (cov, nul, calls, alltests); title['S10'] = 'Host-associated vs surrounding metagenomes: coverage, null-gene recruitment, calls and all tests'
@@ -151,11 +151,11 @@ D = pd.read_csv(f'{I}/hitlevel/deeptmhmm_per_hit_annotated.tsv', sep='\t')[['hit
 sd3 = o3.merge(A, on='hit_id', how='left').merge(D, on='hit_id', how='left')
 assert len(sd3) == 9396 and sd3.subfamily.notna().all() and sd3.DeepTMHMM_topology.notna().all()
 with pd.ExcelWriter(f'{O}/Supplementary_Data_3.xlsx') as xw:
-    pd.DataFrame({'Supplementary Data 3. Curated genes of the ten enzyme families': ['One row per curated gene (9,396 genes in 4,619 genomes): source genome, host system, GTDB lineage, identity to the closest characterised reference, subfamily label (unassigned = no label; no_motif_signal = family without subfamily resolution), Pfam-A architecture (hmmscan --cut_ga, i-Evalue <= 1e-5) and DeepTMHMM topology (SP signal peptide, TM transmembrane, GLOB globular).']}).to_excel(xw, sheet_name='README', index=False)
+    pd.DataFrame({'Supplementary Data 3. Curated genes of the ten enzyme families': ['One row per curated gene (9,396 genes in 4,619 genomes): source genome, host system, GTDB lineage, identity to the closest characterized reference, subfamily label (unassigned = no label; no_motif_signal = family without subfamily resolution), Pfam-A architecture (hmmscan --cut_ga, i-Evalue <= 1e-5) and DeepTMHMM topology (SP signal peptide, TM transmembrane, GLOB globular).']}).to_excel(xw, sheet_name='README', index=False)
     sd3.to_excel(xw, sheet_name='genes', index=False)
 # SD4 abundance
 with pd.ExcelWriter(f'{O}/Supplementary_Data_4.xlsx') as xw:
-    pd.DataFrame({'Supplementary Data 4. Abundance of the ten families and their subfamilies per sample': ['RPKG = reads per kilobase of target per genome equivalent (all 9,187 mapping targets; runs of one BioSample pooled). family_reads: reads assigned to each family. subfamily_RPKG: long format, samples with reads only.']}).to_excel(xw, sheet_name='README', index=False)
+    pd.DataFrame({'Supplementary Data 4. Abundance of the ten families and their subfamilies per sample': ['RPKG = reads per kilobase of target per genome equivalent (all 9,187 mapping targets; runs of one BioSample pooled). family_reads: reads assigned to each family. subfamily_RPKG: long format, samples with reads only. A value of zero means that no reads from the sample mapped to the family; 102 samples (79 coral, 16 sponge, 7 chicken gut) have no reads on any family.']}).to_excel(xw, sheet_name='README', index=False)
     F.to_excel(xw, sheet_name='family_RPKG', index=False)
     pd.read_csv(f'{R}/s04_build/family_reads_main.csv').to_excel(xw, sheet_name='family_reads', index=False)
     pd.read_csv(f'{R}/s04_build/subfamily_rpkg_long_main.csv').to_excel(xw, sheet_name='subfamily_RPKG', index=False)
@@ -170,7 +170,7 @@ with pd.ExcelWriter(f'{O}/Supplementary_Data_6.xlsx') as xw:
         d = d[d[idc].isin(keep)]; d.to_excel(xw, sheet_name=sh, index=False)
 # SD6 BGC regions
 with pd.ExcelWriter(f'{O}/Supplementary_Data_7.xlsx') as xw:
-    pd.DataFrame({'Supplementary Data 7. Biosynthetic gene clusters in genomes analysed for co-location': ['antiSMASH 6.1.1 regions with product class, nearest target gene and relationship (within, flanking <= 10 kb, distant). primary: hub genera with labels in >= 3 families; sensitivity: >= 2.']}).to_excel(xw, sheet_name='README', index=False)
+    pd.DataFrame({'Supplementary Data 7. Biosynthetic gene clusters in genomes analyzed for co-location': ['antiSMASH 6.1.1 regions with product class, nearest target gene and relationship (within, flanking <= 10 kb, distant). primary: hub genera with labels in >= 3 families; sensitivity: >= 2.']}).to_excel(xw, sheet_name='README', index=False)
     for s_ in ['primary_ge3', 'sensitivity_ge2']:
         pd.read_csv(f'{I}/bgc_genomic_hubs/{s_}/bgc_per_genome.tsv', sep='\t').to_excel(xw, sheet_name=s_, index=False)
 # SD7 metatranscriptomes and surroundings

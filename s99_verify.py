@@ -29,7 +29,7 @@ mp = pd.read_excel(f'{FG}/Figure_1_source_data.xlsx', 'b_sample_locations')
 check('Figure 1 map = main set', set(mp.sample_id) == main)
 st4 = pd.read_excel(f'{T}/Supplementary_Tables.xlsx', 'Table S1', header=None)
 check('Supplementary Table 1 lists 179 studies', (st4.iloc[:, 0].astype(str).isin(set(S.study))).sum() == 179)
-words = re.compile(r'exclu|reject|horizontal gene transfer|\bHGT\b|centroid|approximate|named place|coord_source', re.I)
+words = re.compile(r'exclu|reject|horizontal gene transfer|\bHGT\b|(?:country|place) centroid|approximate|named place|coord_source', re.I)
 hit = []
 for f in glob.glob(f'{T}/*.xlsx'):
     x = pd.ExcelFile(f)
@@ -48,7 +48,9 @@ check('PERMANOVA R2 0.198 / study 0.243 / nested 0.349', [round(V.loc[k, 'R2'], 
 C = pd.read_csv(f'{R}/s11_ambient/host_vs_ambient_calls.csv'); f3 = pd.read_excel(f'{FG}/Figure_3_source_data.xlsx', 'b_calls')
 check('Figure 3b calls = s11 calls', f3[['system', 'set', 'call']].equals(C[['system', 'set', 'call']]))
 cnt = C.groupby('call').size().to_dict()
-check('calls: 10 host-enriched, 8 surroundings-enriched, 5 unresolved', (cnt.get('host-enriched'), cnt.get('surroundings-enriched'), cnt.get('unresolved')) == (10, 8, 5), cnt)
+check('calls: 10 host-enriched, 9 surroundings-enriched, 5 unresolved (chicken surroundings 111 runs / 10 projects, 6 Nov 2026)', (cnt.get('host-enriched'), cnt.get('surroundings-enriched'), cnt.get('unresolved')) == (10, 9, 5), cnt)
+amb_ = pd.read_csv(f'{R}/s11_ambient/ambient_runs_rpkg.csv'); amb_ = amb_[amb_.group != 'host']
+check('surroundings: 230 distinct runs in 105 projects; chicken 111 runs in 10 projects', (amb_.run.nunique(), amb_.unit.nunique(), amb_[amb_.system == 'Chicken'].run.nunique(), amb_[amb_.system == 'Chicken'].unit.nunique()) == (230, 105, 111, 10))
 print('   calls:', cnt)
 ar = pd.read_csv(f'{R}/s11_ambient/ambient_runs_rpkg.csv')
 check('ambient runs are not host runs', not (set(ar[ar.group != 'host'].run) & set(ok_runs.run)))

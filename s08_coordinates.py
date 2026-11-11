@@ -66,7 +66,7 @@ def _c(g):
     c = big.centroid
     return c if big.contains(c) else big.representative_point()
 cent = {r.name: _c(r.geometry) for r in world.itertuples()}
-FIX = {'PRJEB38174': 'France'}       # MetaChick: ENA country empty; BioSample geo_loc_name France (Evry = sequencing centre, not farm) -> country centroid
+FIX = {'PRJEB38174': 'France'}       # MetaChick: ENA country empty; BioSample geo_loc_name France (Evry = sequencing center, not farm) -> country centroid
 P.loc[P.lat.isna() & P.BioProject.isin(FIX), 'country'] = P.BioProject.map(FIX)
 k = P.lat.isna() & P.country.map(lambda c: NE.get(c, c) in cent)
 P.loc[k, 'lat'] = P.loc[k, 'country'].map(lambda c: cent[NE.get(c, c)].y); P.loc[k, 'lon'] = P.loc[k, 'country'].map(lambda c: cent[NE.get(c, c)].x)
